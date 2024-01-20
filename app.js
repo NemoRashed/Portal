@@ -5,9 +5,23 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
+
+// DB Connection - New
+require("dotenv").config();
+var mongoose = require("mongoose");
+const mongoDB = process.env.MONGODB_URI; // dotenv
+mongoose
+  .connect(mongoDB)
+  .then(() => {
+    console.log("MongoDB connected…");
+    app.listen(3001, () => console.log("Listening on Port 3001"));
+  })
+  .catch((err) => console.log(err)); // mongoose
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+// Ended DB Stuff - New
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +34,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
