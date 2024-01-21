@@ -6,12 +6,20 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 
+// Stuff i just added 
+var User = require('./models/user');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcryptjs');
+
 var app = express();
 
 // DB Connection - New
 require("dotenv").config();
 var mongoose = require("mongoose");
-const mongoDB = process.env.MONGODB_URI; // dotenv
+const mongoDB = process.env.MONGODB_URI; 
+mongoose.set("strictQuery", false);
 mongoose
   .connect(mongoDB)
   .then(() => {
@@ -25,13 +33,60 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Passport 
+// PassportJS
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({username: username}, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, {message: 'Incorrect username'});
+      }
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          // passwords match! log user in
+          return done(null, user);
+        } else {
+          // passwords do not match!
+          return done(null, false, {message: 'Incorrect password'});
+        }
+      });
+
+      /* return done(null, user); */
+    });
+  })
+);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
+app.use(session({secret: 'cats', resave: false, saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+// End Passport stuff 
 
 app.use('/', indexRouter);
 
@@ -48,7 +103,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {title: 'Error'});
 });
 
 module.exports = app;
