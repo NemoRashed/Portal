@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./head.ejs') %>
+
+  <body>
+    <%- include('./nav.ejs') %> 
+    <% if(typeof alert != 'undefined'){ %> <%
+    alert.forEach((err)=>{ %>
+    <p><%= err.msg %></p>
+    <% }) %> <% } %>
+
+    <form class="signup" action="/signup" method="post" autocomplete="on">
+      <h1>Sign Up</h1>
+      <p>Already registered? <a href="/login">Log in </a></p>
+
+      <section>
+        <label for="username">Username</label>
+        <input
+          name="username"
+          type="text"
+          autocomplete="username"
+          autofocus
+          required
+        />
+      </section>
+      <section>
+        <label for="current-password">Password</label>
+        <input
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        />
+      </section>
+      <section>
+        <label for="current-password">Confirm Password</label>
+        <input
+          name="confirmPassword"
+          type="password"
+          autocomplete="current-password"
+          required
+        />
+      </section>
+      <section>
+        <p>Select Avatar</p>
+
+        <input type="radio" value="Avatar1" name="avatar" required />
+          <label for="Avatar1">Avatar1</label><br />
+
+        <input type="radio" value="Avatar2" name="avatar" required />
+          <label for="Avatar2">Avatar2</label><br />
+
+        <input type="radio" value="Avatar3" name="avatar" required />
+          <label for="Avatar3">Avatar3</label><br />
+      </section>
+
+      <button type="submit">Register</button>
+    </form>
+  </body>
+</html>

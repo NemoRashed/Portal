@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./head.ejs') %>
+
+  <body>
+    <%- include('./nav.ejs') %> <% if(typeof alert != 'undefined'){ %> <%
+    alert.forEach((err)=>{ %>
+    <p><%= err.msg %></p>
+    <% }) %> <% } %>
+
+    <form
+      class="transaction card"
+      action="/transaction"
+      method="POST"
+      autocomplete="on"
+    >
+      <h1>Transaction</h1>
+
+      <!--Customer-->
+      <section>
+        <label for="customer">Customer</label>
+        <input
+          name="customer"
+          type="text"
+          autocomplete="customer"
+          autofocus
+          required
+        />
+      </section>
+      <!--Device-->
+      <section>
+        <label for="device">Device</label>
+        <input
+          name="device"
+          type="text"
+          autocomplete="device"
+          autofocus
+          required
+        />
+      </section>
+      <!-- Cost -->
+      <section>
+        <label for="cost">Cost</label>
+        <input
+          name="cost"
+          type="number"
+          autocomplete="cost"
+          autofocus
+          required
+        />
+      </section>
+      <!-- Location -->
+      <section>
+        <p>Select Location</p>
+        <input type="radio" value="West Seattle" name="location" required />
+          <label for="West Seattle">West Seattle</label><br />
+
+        <input type="radio" value="Ballard" name="location" required />
+          <label for="Ballard">Ballard</label><br />
+
+        <input type="radio" value="North Seattle" name="location" required />
+          <label for="North Seattle">North Seattle</label><br />
+      </section>
+
+      <!--Date-->
+      <section>
+        <label for="date">Date</label>
+        <input name="date" type="date" autocomplete="date" autofocus required />
+      </section>
+      <!--User-->
+      <input type="hidden" name="user" value="<%=user.username%>" />
+
+      <button type="submit">Record Transaction</button>
+    </form>
+
+    <section>
+      <% if (transactions.length > 0){ %> <% transactions.forEach(tran => { %>
+      <div class="data">
+        <div class="div2">
+          <h3><%= tran.customer %></h3>
+          <p><%= tran.device %></p>
+          <p><%= tran.cost %></p>
+          <p><%= tran.location %></p>
+          <p><%= tran.user %></p>
+          <p><%= tran.date %></p>
+          <% if(currentUser && currentUser.isAdmin == 'true'){ %>
+          <button class="delete" data-transaction= <%= tran._id %>> Delete
+          </button>
+          <p><%= tran._id %></p>
+
+          <% } %>
+        </div>
+      </div>
+      <% }) %> <% } else { %>
+      <p>There are no transactions to display</p>
+      <% } %>
+    </section>
+
+    <script>
+      const deleteBTN = document.getElementsByClassName("delete");
+      for (let i = 0; i < deleteBTN.length; i++) {
+        deleteBTN[i].addEventListener("click", (e) => {
+          const endpoint = "/delete/" + deleteBTN[i].dataset.transaction;
+          fetch(endpoint, { method: "DELETE" })
+            .then((response) => response.json())
+            .then((data) => (window.location.href = data.redirect))
+            .catch((err) => console.log(err));
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<!-- currentUser is the same as user.username -->
+<!--
+
+     <script>
+      console.log("Inside script bs ");
+      const deleteBTN = document.getElementsByClassName("delete");
+      console.log(deleteBTN[0]);
+      deleteBTN[0].addEventListener("click", (e) => {
+        const endpoint = "/delete/" + deleteBTN[0].dataset.transaction;
+        console.log(endpoint,'Endpoint');
+        fetch(endpoint, { method: "DELETE" })
+          .then((response) => response.json())
+          .then((data) => (window.location.href = data.redirect))
+          .catch((err) => console.log(err));
+      });
+    </script>
+-->

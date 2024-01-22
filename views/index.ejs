@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./head.ejs') %>
+  <body>
+    <%- include('./nav.ejs') %>
+    <main>
+      <div>Welcome To The LML Repair Portal</div>
+      <% if(currentUser){ %>
+        <span>
+          <p>You are logined in as <%= user.username %></p>
+        </span>
+        <% } else { %>
+        <span>
+          <p>You are not logined in </p>
+        </span>
+        <% } %> 
+    </main>
+  </body>
+</html>
