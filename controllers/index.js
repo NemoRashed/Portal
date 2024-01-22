@@ -28,10 +28,17 @@ const signUpPostController = [
       if (err) {
         next(err);
       }
+      // Setting up Admin to be included 
+      let adminRights = 'false';
+      if (req.body.isAdmin === "lml") {
+          adminRights = "true";
+        }
+
       const item = new UserModel({
         username: req.body.username,
         password: hashedPassword,
         avatar: req.body.avatar,
+        isAdmin: adminRights
       })
         .save()
         .then((result) => console.log(result))
@@ -80,20 +87,23 @@ const transactionController = function (req, res, next) {
 };
 
 const transactionPostController = [
- body("title", "Empty title").trim().isLength({ min: 1 }).escape(),
-  body("transaction", "Empty transaction").trim().isLength({ min: 1 }).escape(),
+  // body("customer", "Empty customer").trim().isLength({ min: 1 }).escape(),
+  // body("device", "Empty device").trim().isLength({ min: 1 }).escape(),
   function (req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const alert = errors.array();
       res.render("transaction", { title: "Transaction", alert });
     }
-    // Setting up date 
-    const d = new Date(Date.parse(req.body.date))
+    // Setting up date
+    const d = new Date(Date.parse(req.body.date));
     const year = d.getFullYear();
     const month = d.getMonth() + 1;
     const day = d.getDate();
-    req.body.date = month + '/' + day + '/' + year; 
+    req.body.date = month + "/" + day + "/" + year;
+    // Settting up Customer
+    //  req.body.customer = { name: req.body.customername, email: req.body.customeremail, phone: req.body.customerphonenumber };
+    req.body.profit = req.body.total - req.body.part;
     const item = new TransactionModel(req.body)
       .save()
       .then((result) => console.log(result))
@@ -103,42 +113,15 @@ const transactionPostController = [
   },
 ];
 
-// Delete a transaction 
+// Delete a transaction
 const deleteTransaction = function (req, res, next) {
   const id = req.params.transaction;
   console.log(id, "Here is the ID");
   TransactionModel.findByIdAndDelete(id)
-    .then((result) => res.json({redirect: '/'}))
+    .then((result) => res.json({ redirect: "/" }))
     .catch((err) => console.log(err));
 };
 
-// Admin
-
-const adminGetController = function (req, res, next) {
-  res.render('admin', {title: 'Admin'});
-};
-
-const adminPostController = [
-  body('isAdmin', 'Empty Value').trim().isLength({min: 3}).escape(),
-  function (req, res, next) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const alert = errors.array();
-      res.render('admin', {title: 'Admin', alert});
-    }
-
-    const id = req.body.id;
-    if (req.body.isAdmin === 'lml') {
-      UserModel.findByIdAndUpdate(id, {
-        isAdmin: 'true',
-      })
-        .then((result) => console.log(result))
-        .catch((err) => console.log(err));
-    }
-
-    res.redirect('/');
-  },
-];
 
 module.exports = {
   Home,
@@ -149,7 +132,5 @@ module.exports = {
   logOutController,
   transactionController,
   transactionPostController,
-  adminGetController,
-  adminPostController,
-  deleteTransaction
+  deleteTransaction,
 };

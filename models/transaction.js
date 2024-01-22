@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 const transactionSchema = new Schema(
   {
-    customer: String,
-    device: String,
-    cost: Number,
+    repair: String,
+    total: Number,
+    part:Number,
+    profit:Number,
     location: String,
     user: String,
     date: String,
@@ -30,11 +31,32 @@ Tax
 Tip
 Final Total
 
-  customer: { name: String, email: String, phone: String },
     device: { brand: String, make: String, model: String, repair: String },
     cost: { parts: Number, labor: Number, total: Number },
+
+    service: {}
+    product: {}
+
+    cart:{
+      service:{
+cost:number
+description:string
+      }
+      product:{
+        cost:number
+        description:string
+      }
+      processing:number
+      tax:number 
+      tip:number
+    }
+Cart style works best if i itemize website stuff like repairs and products 
+
+       customer: String,
+    device: String,
+    description:String,
+    cost: Number,
     location: String,
     user: String,
     date: String,
-
 */

@@ -21,8 +21,4 @@ router.get('/transaction', Controllers.transactionController);
 router.post('/transaction', Controllers.transactionPostController);
 router.delete('/delete/:transaction', Controllers.deleteTransaction);
 
-// Admin
-router.get('/admin', Controllers.adminGetController);
-router.post('/admin', Controllers.adminPostController);
-
 module.exports = router;

@@ -16,39 +16,44 @@
     >
       <h1>Transaction</h1>
 
-      <!--Customer-->
+      <!--Repair-->
       <section>
-        <label for="customer">Customer</label>
+        <label for="repair">Repair</label>
         <input
-          name="customer"
+          name="repair"
           type="text"
-          autocomplete="customer"
+          autocomplete="repair"
           autofocus
           required
         />
+       
       </section>
-      <!--Device-->
+      <!--total-->
       <section>
-        <label for="device">Device</label>
+        <label for="total">Total</label>
         <input
-          name="device"
-          type="text"
-          autocomplete="device"
-          autofocus
-          required
-        />
-      </section>
-      <!-- Cost -->
-      <section>
-        <label for="cost">Cost</label>
-        <input
-          name="cost"
+          name="total"
           type="number"
-          autocomplete="cost"
+          autocomplete="total"
           autofocus
           required
         />
       </section>
+      <!-- Part -->
+      <section>
+        <label for="part">Part Cost</label>
+        <input
+          name="part"
+          type="number"
+          autocomplete="part"
+          autofocus
+          required
+        />
+      </section>
+
+      <!-- Profit -->
+      <input type="hidden" name="profit" value="unknown" />
+
       <!-- Location -->
       <section>
         <p>Select Location</p>
@@ -68,7 +73,7 @@
         <input name="date" type="date" autocomplete="date" autofocus required />
       </section>
       <!--User-->
-      <input type="hidden" name="user" value="<%=user.username%>" />
+      <input type="hidden" name="user" value= <%=currentUser.username %> />
 
       <button type="submit">Record Transaction</button>
     </form>
@@ -77,16 +82,16 @@
       <% if (transactions.length > 0){ %> <% transactions.forEach(tran => { %>
       <div class="data">
         <div class="div2">
-          <h3><%= tran.customer %></h3>
-          <p><%= tran.device %></p>
-          <p><%= tran.cost %></p>
+          <h3><%= tran.repair %></h3>
+          <p><%= tran.total %></p>
+          <p><%= tran.part %></p>
+          <p><%= tran.profit %></p>
           <p><%= tran.location %></p>
           <p><%= tran.user %></p>
           <p><%= tran.date %></p>
           <% if(currentUser && currentUser.isAdmin == 'true'){ %>
           <button class="delete" data-transaction= <%= tran._id %>> Delete
           </button>
-          <p><%= tran._id %></p>
 
           <% } %>
         </div>
@@ -112,19 +117,3 @@
 </html>
 
 <!-- currentUser is the same as user.username -->
-<!--
-
-     <script>
-      console.log("Inside script bs ");
-      const deleteBTN = document.getElementsByClassName("delete");
-      console.log(deleteBTN[0]);
-      deleteBTN[0].addEventListener("click", (e) => {
-        const endpoint = "/delete/" + deleteBTN[0].dataset.transaction;
-        console.log(endpoint,'Endpoint');
-        fetch(endpoint, { method: "DELETE" })
-          .then((response) => response.json())
-          .then((data) => (window.location.href = data.redirect))
-          .catch((err) => console.log(err));
-      });
-    </script>
--->

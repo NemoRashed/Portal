@@ -1,16 +1,17 @@
 <nav>
   <ul>
-    <li><a href="/"> LML Repair Portal</a></li>
+    <li>
+      <a href="/">
+        <img src="./images/favicon.png" alt="Favicon" width="100px"
+      /></a>
+    </li>
   </ul>
   <ul>
     <% if (currentUser) {%>
     <li>
       <a href="/transaction">Transactions</a>
     </li>
-    <li>
-      <a href="/admin">Admin</a>
-    </li>
-
+   
     <li>
       <img src="./images/<%= currentUser.avatar%>.png" alt="A" width="20px" />
     </li>
