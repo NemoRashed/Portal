@@ -3,7 +3,7 @@
   <%- include('./head.ejs') %>
 
   <body>
-    <%- include('./nav.ejs') %> <% if(typeof alert != 'undefined'){ %> <%
+    <%- include('./header.ejs') %> <% if(typeof alert != 'undefined'){ %> <%
     alert.forEach((err)=>{ %>
     <p><%= err.msg %></p>
     <% }) %> <% } %>

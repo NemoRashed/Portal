@@ -1,0 +1,22 @@
+<header>
+  <div>
+    <a href="/">
+      <img src="./images/favicon.png" alt="Favicon" width="100px"
+    /></a>
+  </div>
+
+  <div>
+    <% if (currentUser) {%>
+    <a href="/transaction">Transactions</a>
+
+    <img src="./images/<%= currentUser.avatar%>.png" alt="A" width="20px" />
+
+    <a href="/logout">Log Out</a>
+    <%} else { %>
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
+    <% } %>
+  </div>
+
+
+</header>

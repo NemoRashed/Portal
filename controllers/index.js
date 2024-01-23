@@ -6,7 +6,7 @@ const { body, validationResult } = require("express-validator");
 
 // Home
 const Home = function (req, res, next) {
-  res.render("index", { title: "Home", user: req.user });
+  res.render("index", { title: "Home", user: req.user, style: '/stylesheets/index.css' });
 };
 
 // Sign Up
