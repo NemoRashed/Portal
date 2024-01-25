@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('./head.ejs') %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/login.css" />
+  </head>
 
   <body>
-    <%- include('./header.ejs') %> <% if(typeof alert != 'undefined'){ %> <%
-    alert.forEach((err)=>{ %>
-    <p><%= err.msg %></p>
-    <% }) %> <% } %>
+    <%- include('./header.ejs') %>
 
-    <form class="login card" action="/login" method="POST" autocomplete="on">
-      <h1>Login</h1>
-      <p>Don't have an account? <a href="/signup">Sign up </a></p>
+    <h1>Login</h1>
+    <div>
+      <p>Don't have an account?</p>
+      <a href="/signup"> Sign up </a>
+    </div>
 
+    <form class="login" action="/login" method="POST" autocomplete="on">
       <section>
         <label for="username">Username</label>
         <input
@@ -19,6 +27,7 @@
           name="username"
           type="text"
           autocomplete="username"
+          placeholder="Username"
           required
           autofocus
         />
@@ -29,11 +38,14 @@
           id="current-password"
           name="password"
           type="password"
+          placeholder="Password"
           autocomplete="current-password"
           required
         />
       </section>
       <button type="submit">Login</button>
     </form>
+
+    <%- include('./footer.ejs') %>
   </body>
 </html>

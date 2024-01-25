@@ -7,8 +7,23 @@
 
   <div>
     <% if (currentUser) {%>
+    <!-- Setup a Cart / POS System / Track Transactions -->
     <a href="/transaction">Transactions</a>
+    <!-- Setup a Inventory System -->
+    <a href="/inventory">Inventory</a>
+    <!-- Pricing & Services Info -->
+    <a href="/pricing">Pricing</a>
 
+   
+    <!-- Pricing & Products Info -->
+      <!--  <a href="/products">Products</a> -->
+    <!-- Customer Consent Forms --> 
+      <!--  <a href="/consent">Consent</a> -->
+    <!-- Customer Ticketing System --> 
+      <!-- <a href="/ticket">Ticketing</a> -->
+    <!-- Customer System -->
+    <!-- <a href="/marketing">Marketing</a> -->
+  
     <img src="./images/<%= currentUser.avatar%>.png" alt="A" width="20px" />
 
     <a href="/logout">Log Out</a>
@@ -17,6 +32,5 @@
     <a href="/signup">Sign Up</a>
     <% } %>
   </div>
-
-
 </header>
+
