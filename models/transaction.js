@@ -7,6 +7,7 @@ const transactionSchema = new Schema(
     total: Number,
     part:Number,
     profit:Number,
+    method:String,
     location: String,
     user: String,
     date: String,

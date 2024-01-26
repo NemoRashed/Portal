@@ -109,14 +109,13 @@ const transactionPostController = [
       .then((result) => console.log(result))
       .catch((err) => next(err));
 
-    res.redirect("/");
+    res.redirect("/transaction");
   },
 ];
 
 // Delete a transaction
 const deleteTransaction = function (req, res, next) {
   const id = req.params.transaction;
-  console.log(id, "Here is the ID");
   TransactionModel.findByIdAndDelete(id)
     .then((result) => res.json({ redirect: "/" }))
     .catch((err) => console.log(err));

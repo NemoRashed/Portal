@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('./head.ejs') %>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/transaction.css" />
+  </head>
   <body>
-    <%- include('./header.ejs') %> <% if(typeof alert != 'undefined'){ %> <%
-    alert.forEach((err)=>{ %>
-    <p><%= err.msg %></p>
-    <% }) %> <% } %>
+    <%- include('./header.ejs') %>
+    <h1>Transaction</h1>
 
     <form
       class="transaction card"
@@ -14,8 +19,6 @@
       method="POST"
       autocomplete="on"
     >
-      <h1>Transaction</h1>
-
       <!--Repair-->
       <section>
         <label for="repair">Repair</label>
@@ -26,7 +29,6 @@
           autofocus
           required
         />
-       
       </section>
       <!--total-->
       <section>
@@ -51,6 +53,17 @@
         />
       </section>
 
+          <!-- Payment Method -->
+          <section>
+            <label for="method">Payment Method</label>
+            <input
+              name="method"
+              type="text"
+              autocomplete="part"
+              autofocus
+              required
+            />
+          </section>
       <!-- Profit -->
       <input type="hidden" name="profit" value="unknown" />
 
@@ -78,28 +91,98 @@
       <button type="submit">Record Transaction</button>
     </form>
 
-    <section>
-      <% if (transactions.length > 0){ %> <% transactions.forEach(tran => { %>
-      <div class="data">
-        <div class="div2">
-          <h3><%= tran.repair %></h3>
-          <p><%= tran.total %></p>
-          <p><%= tran.part %></p>
-          <p><%= tran.profit %></p>
-          <p><%= tran.location %></p>
-          <p><%= tran.user %></p>
-          <p><%= tran.date %></p>
-          <% if(currentUser && currentUser.isAdmin == 'true'){ %>
-          <button class="delete" data-transaction= <%= tran._id %>> Delete
-          </button>
 
+<aside>
+
+  <button class="accordion">Date</button>
+  <div class="panel">
+    <p>West Seattle</p>
+    <p>Ballard</p>
+    <p>North Seattle</p>
+  </div>
+
+
+<button class="accordion">Location</button>
+<div class="panel">
+  <button>All</button>
+  <button>West Seattle</button>
+  <button>Ballard</button>
+  <button>North Seattle</button>
+</div>
+
+</aside>
+
+
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
+
+
+
+
+
+
+
+
+    <!-- Table -->
+    <table class="data">
+      <tr>
+        <th>Repair</th>
+        <th>Total</th>
+        <th>Part</th>
+        <th>Profit</th>
+        <th>Location</th>
+        <th>User</th>
+        <th>Date</th>
+        <% if(currentUser && currentUser.isAdmin == 'true'){ %>
+
+        <th>Admin</th>
+        <% } %>
+
+      </tr>
+      <% if (transactions.length > 0){ %> 
+        <% transactions.forEach(tran => { %>
+    
+        <tr class="data-piece">
+          <td><%= tran.repair %></td>
+          <td><%= tran.total %></td>
+          <td><%= tran.part %></td>
+          <td><%= tran.profit %></td>
+          <td><%= tran.location %></td>
+          <td><%= tran.user %></td>
+          <td><%= tran.date %></td>
+
+          <% if(currentUser && currentUser.isAdmin == 'true'){ %>
+            <td>
+            <button class="delete" data-transaction= <%= tran._id %>> Delete
+          </button>
+          </td>
+        </tr>
           <% } %>
-        </div>
-      </div>
+       
+    
       <% }) %> <% } else { %>
       <p>There are no transactions to display</p>
       <% } %>
-    </section>
+      </table>
 
     <script>
       const deleteBTN = document.getElementsByClassName("delete");
