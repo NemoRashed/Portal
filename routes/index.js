@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Controllers = require('../controllers/index.js');
+let transactionControllers = require('../controllers/transaction.js');
 
 // Home
 router.get('/', Controllers.Home);
@@ -17,11 +18,11 @@ router.post('/login', Controllers.loginPostController);
 router.get('/logout', Controllers.logOutController);
 
 // Transaction 
-router.get('/transaction', Controllers.transactionController);
-router.post('/transaction', Controllers.transactionPostController);
-router.delete('/delete/:transaction', Controllers.deleteTransaction);
+router.get('/transaction', transactionControllers.Home);
+router.post('/transaction', transactionControllers.PostRecordController);
+router.post('/transactionFilters', transactionControllers.PostFiltersController);
+router.delete('/delete/:transaction', transactionControllers.deleteTransaction);
 
-router.post('/transactionFilters', Controllers.transactionFiltersController);
 
 module.exports = router;
 
