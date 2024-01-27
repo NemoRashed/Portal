@@ -21,4 +21,7 @@ router.get('/transaction', Controllers.transactionController);
 router.post('/transaction', Controllers.transactionPostController);
 router.delete('/delete/:transaction', Controllers.deleteTransaction);
 
+router.post('/transactionFilters', Controllers.transactionFiltersController);
+
 module.exports = router;
+

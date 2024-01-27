@@ -6,7 +6,11 @@ const { body, validationResult } = require("express-validator");
 
 // Home
 const Home = function (req, res, next) {
-  res.render("index", { title: "Home", user: req.user, style: '/stylesheets/index.css' });
+  res.render("index", {
+    title: "Home",
+    user: req.user,
+    style: "/stylesheets/index.css",
+  });
 };
 
 // Sign Up
@@ -28,17 +32,17 @@ const signUpPostController = [
       if (err) {
         next(err);
       }
-      // Setting up Admin to be included 
-      let adminRights = 'false';
+      // Setting up Admin to be included
+      let adminRights = "false";
       if (req.body.isAdmin === "lml") {
-          adminRights = "true";
-        }
+        adminRights = "true";
+      }
 
       const item = new UserModel({
         username: req.body.username,
         password: hashedPassword,
         avatar: req.body.avatar,
-        isAdmin: adminRights
+        isAdmin: adminRights,
       })
         .save()
         .then((result) => console.log(result))
@@ -75,15 +79,11 @@ const logOutController = (req, res) => {
 
 // Transaction
 const transactionController = function (req, res, next) {
-  TransactionModel.find()
-    .then((result) => {
-      res.render("transaction", {
-        title: "Transaction",
-        user: req.user,
-        transactions: result,
-      });
-    })
-    .catch((err) => res.send(err));
+  res.render("transaction", {
+    title: "Transaction",
+    user: req.user,
+    transactions: {},
+  });
 };
 
 const transactionPostController = [
@@ -113,14 +113,63 @@ const transactionPostController = [
   },
 ];
 
+const transactionFiltersController = function (req, res, next) {
+  const yo = typeof req.body.date;
+  console.log(yo, "date value ");
+
+  if (req.body.date == "") {
+    console.log("Inside If 1  ");
+
+    if (req.body.location == "all") {
+      TransactionModel.find()
+        .then((result) => {
+          res.render("transaction", {
+            title: "Transaction",
+            user: req.user,
+            transactions: result,
+          });
+        })
+        .catch((err) => res.send(err));
+    } else {
+      TransactionModel.find({ location: req.body.location })
+        .then((result) => {
+          res.render("transaction", {
+            title: "Transaction",
+            user: req.user,
+            transactions: result,
+          });
+        })
+        .catch((err) => res.send(err));
+    }
+  } else {
+    console.log("Inside If 2  ");
+
+    // Setting up date
+    const d = new Date(Date.parse(req.body.date));
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    req.body.date = month + "/" + day + "/" + year;
+
+    TransactionModel.find({ location: req.body.location, date: req.body.date })
+      .then((result) => {
+        res.render("transaction", {
+          title: "Transaction",
+          user: req.user,
+          transactions: result,
+        });
+      })
+      .catch((err) => res.send(err));
+  }
+};
+
 // Delete a transaction
 const deleteTransaction = function (req, res, next) {
   const id = req.params.transaction;
   TransactionModel.findByIdAndDelete(id)
-    .then((result) => res.json({ redirect: "/" }))
+    .then((result) => res.json({ redirect: "/transaction" }))
     .catch((err) => console.log(err));
 };
-
 
 module.exports = {
   Home,
@@ -132,4 +181,5 @@ module.exports = {
   transactionController,
   transactionPostController,
   deleteTransaction,
+  transactionFiltersController,
 };

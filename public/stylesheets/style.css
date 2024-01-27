@@ -9,12 +9,16 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-  font-family: myFont;
+ 
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  font-family: myFont;
+}
+h1, button{
+  font-family: myFont;
 }
 
 /* Header */

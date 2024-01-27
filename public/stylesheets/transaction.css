@@ -3,6 +3,10 @@ h1 {
   justify-content: center;
   margin: 20px;
 }
+h2,h4{
+  display: flex;
+  justify-content: center;
+}
 div {
   display: flex;
   justify-content: center;
@@ -42,6 +46,7 @@ table {
   margin-top: 10px;
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 100px;
 
   td,
   th {
@@ -83,3 +88,39 @@ table {
     display: none;
     overflow: hidden;
   }
+
+
+  /*  Styling Filters */
+
+  .selectFilter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    text-align: center;
+    input {
+      padding: 10px;
+    }
+    button {
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #e2dc1f;
+    }
+    section {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+
+  .noTransactions{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+
+ 

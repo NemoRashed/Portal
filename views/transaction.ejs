@@ -11,7 +11,7 @@
   </head>
   <body>
     <%- include('./header.ejs') %>
-    <h1>Transaction</h1>
+    <h1>Transactions</h1>
 
     <form
       class="transaction card"
@@ -19,6 +19,9 @@
       method="POST"
       autocomplete="on"
     >
+    <h2>Record</h2>
+    <h4>Record a Transaction</h4>
+
       <!--Repair-->
       <section>
         <label for="repair">Repair</label>
@@ -53,17 +56,17 @@
         />
       </section>
 
-          <!-- Payment Method -->
-          <section>
-            <label for="method">Payment Method</label>
-            <input
-              name="method"
-              type="text"
-              autocomplete="part"
-              autofocus
-              required
-            />
-          </section>
+      <!-- Payment Method -->
+      <section>
+        <label for="method">Payment Method</label>
+        <input
+          name="method"
+          type="text"
+          autocomplete="part"
+          autofocus
+          required
+        />
+      </section>
       <!-- Profit -->
       <input type="hidden" name="profit" value="unknown" />
 
@@ -86,62 +89,66 @@
         <input name="date" type="date" autocomplete="date" autofocus required />
       </section>
       <!--User-->
-      <input type="hidden" name="user" value= <%=currentUser.username %> />
+      <input type="hidden" name="user" value= <%= currentUser.username %>
+      />
 
       <button type="submit">Record Transaction</button>
     </form>
 
 
-<aside>
-
-  <button class="accordion">Date</button>
-  <div class="panel">
-    <p>West Seattle</p>
-    <p>Ballard</p>
-    <p>North Seattle</p>
-  </div>
+      <form class="selectFilter" action="/transactionFilters" method="POST">
+              <h2>Search</h2>
+<h4>Search Transactions Using Filters </h4>
+        <section>
+   <p>Select Date</p>
+        <input name="date" type="date" autocomplete="date" autofocus />
 
 
-<button class="accordion">Location</button>
-<div class="panel">
-  <button>All</button>
-  <button>West Seattle</button>
-  <button>Ballard</button>
-  <button>North Seattle</button>
-</div>
+        </section>
+     <section>
+  <p>Select Location</p>
 
-</aside>
+    <input type="radio" value="all" name="location" required />
+          <label for="all">All</label><br />
 
+        <input type="radio" value="West Seattle" name="location" required />
+          <label for="West Seattle">West Seattle</label><br />
 
+        <input type="radio" value="Ballard" name="location" required />
+          <label for="Ballard">Ballard</label><br />
 
-<script>
-var acc = document.getElementsByClassName("accordion");
-var i;
+        <input type="radio" value="North Seattle" name="location" required />
+          <label for="North Seattle">North Seattle</label><br />
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    /* Toggle between adding and removing the "active" class,
+     </section>
+      
+    
+        <button type="submit">Submit</button>
+      </form>
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          /* Toggle between adding and removing the "active" class,
     to highlight the button that controls the panel */
-    this.classList.toggle("active");
+          this.classList.toggle("active");
 
-    /* Toggle between hiding and showing the active panel */
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
-}
-</script>
-
-
+          /* Toggle between hiding and showing the active panel */
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      }
+    </script>
 
 
-
-
-
-
+ <% if (transactions && transactions.length > 0){ %> 
     <!-- Table -->
     <table class="data">
       <tr>
@@ -149,6 +156,7 @@ for (i = 0; i < acc.length; i++) {
         <th>Total</th>
         <th>Part</th>
         <th>Profit</th>
+        <th>Method</th>
         <th>Location</th>
         <th>User</th>
         <th>Date</th>
@@ -156,33 +164,32 @@ for (i = 0; i < acc.length; i++) {
 
         <th>Admin</th>
         <% } %>
-
       </tr>
-      <% if (transactions.length > 0){ %> 
-        <% transactions.forEach(tran => { %>
-    
-        <tr class="data-piece">
-          <td><%= tran.repair %></td>
-          <td><%= tran.total %></td>
-          <td><%= tran.part %></td>
-          <td><%= tran.profit %></td>
-          <td><%= tran.location %></td>
-          <td><%= tran.user %></td>
-          <td><%= tran.date %></td>
+     
+        <%
+      transactions.forEach(tran => { %>
 
-          <% if(currentUser && currentUser.isAdmin == 'true'){ %>
-            <td>
-            <button class="delete" data-transaction= <%= tran._id %>> Delete
+      <tr class="data-piece">
+        <td><%= tran.repair %></td>
+        <td><%= tran.total %></td>
+        <td><%= tran.part %></td>
+        <td><%= tran.profit %></td>
+        <td><%= tran.method %></td>
+        <td><%= tran.location %></td>
+        <td><%= tran.user %></td>
+        <td><%= tran.date %></td>
+
+        <% if(currentUser && currentUser.isAdmin == 'true'){ %>
+        <td>
+          <button class="delete" data-transaction= <%= tran._id %>
+            > Delete
           </button>
-          </td>
-        </tr>
-          <% } %>
-       
-    
-      <% }) %> <% } else { %>
-      <p>There are no transactions to display</p>
+        </td>
+      </tr>
+      <% } %> <% }) %> <% } else { %>
+      <p class="noTransactions">There are no transactions to display. Search For them using the filters above</p>
       <% } %>
-      </table>
+    </table>
 
     <script>
       const deleteBTN = document.getElementsByClassName("delete");
@@ -196,6 +203,8 @@ for (i = 0; i < acc.length; i++) {
         });
       }
     </script>
+        <%- include('./footer.ejs') %>
+
   </body>
 </html>
 
