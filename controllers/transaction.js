@@ -1,4 +1,5 @@
 const TransactionModel = require("../models/transaction");
+const { body, validationResult } = require("express-validator");
 
 // Transaction
 const Home = function (req, res, next) {
@@ -9,7 +10,7 @@ const Home = function (req, res, next) {
   });
 };
 
-const PostRecordController = [
+const RecordController = [
   // body("customer", "Empty customer").trim().isLength({ min: 1 }).escape(),
   // body("device", "Empty device").trim().isLength({ min: 1 }).escape(),
   function (req, res, next) {
@@ -36,9 +37,9 @@ const PostRecordController = [
   },
 ];
 
-const PostFiltersController = function (req, res, next) {
-  if (req.body.date == "") {
-    if (req.body.location == "all") {
+const SearchController = function (req, res, next) {
+  if (req.query.date == "") {
+    if (req.query.location == "all") {
       TransactionModel.find()
         .then((result) => {
           res.render("transaction", {
@@ -49,7 +50,7 @@ const PostFiltersController = function (req, res, next) {
         })
         .catch((err) => res.send(err));
     } else {
-      TransactionModel.find({ location: req.body.location })
+      TransactionModel.find({ location: req.query.location })
         .then((result) => {
           res.render("transaction", {
             title: "Transaction",
@@ -61,13 +62,13 @@ const PostFiltersController = function (req, res, next) {
     }
   } else {
     // Setting up date
-    const d = new Date(Date.parse(req.body.date));
+    const d = new Date(Date.parse(req.query.date));
     const year = d.getFullYear();
     const month = d.getMonth() + 1;
     const day = d.getDate();
     req.body.date = month + "/" + day + "/" + year;
 
-    TransactionModel.find({ location: req.body.location, date: req.body.date })
+    TransactionModel.find({ location: req.query.location, date: req.query.date })
       .then((result) => {
         res.render("transaction", {
           title: "Transaction",
@@ -89,7 +90,7 @@ const deleteTransaction = function (req, res, next) {
 
 module.exports = {
   Home,
-  PostRecordController,
+  RecordController,
   deleteTransaction,
-  PostFiltersController,
+  SearchController,
 };

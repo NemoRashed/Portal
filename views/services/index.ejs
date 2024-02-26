@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/services.css" />
+  </head>
+
+  <body>
+    <%- include('../components/header.ejs') %>
+
+    <h1>Services</h1>
+
+
+
+
+    <% if (services && services.length > 0){ %> 
+
+<% services.forEach(serv => { %>
+        <figure className="">
+          <a href= <%=`/services/${serv.url}` %> >
+            <image
+              src=<%= "/images/services/" + serv.image %>
+              alt= <%= serv.name %>
+              width="200"
+              height="200"
+            />
+          </a>
+          <figcaption><%= serv.name %></figcaption>
+        </figure>
+
+       
+      <% }) %> 
+      <% } else { %>
+      <p class="noTransactions">There are no services to display. </p>
+      <% } %>
+ 
+    
+    <%- include('../components/footer.ejs') %>
+  </body>
+</html>
+
+
+
+<!--
+ <section>
+        <label for="category">Category</label>
+        <select id="category" name="service" size="1" >
+          <option value="repair">Repair</option>
+          <option value="buybacks">Buybacks</option>
+          <option value="software">Software</option>
+          <option value="cleaning">Cleaning</option>
+          <option value="diagnostics">Diagnostics</option>
+          <option value="unlocks">Unlocks</option>
+          <option value="customizations">Customizations</option>
+        </select>
+      </section>
+
+
+      
+-->
+
+
+

@@ -19,17 +19,19 @@ var app = express();
 require("dotenv").config();
 var mongoose = require("mongoose");
 const mongoDB = process.env.MONGODB_URI;
+
 mongoose.set("strictQuery", false);
 mongoose
   .connect(mongoDB)
   .then(() => {
     console.log("MongoDB connected…");
-    app.listen(3001, () => console.log("Listening on Port 3001"));
   })
   .catch((err) => console.log(err)); // mongoose
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 // Ended DB Stuff - New
+
+app.listen(3001, () => console.log("Listening on Port 3001"));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -40,7 +42,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
 
 // New Passport stuff
 passport.use(
