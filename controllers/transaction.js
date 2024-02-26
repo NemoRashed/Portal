@@ -1,4 +1,8 @@
-const TransactionModel = require("../models/transaction");
+// const TransactionModel = require("../models/transaction");
+
+const portalDbConnection = require('../models/connections/portal');
+const TransactionModel = portalDbConnection.model('Transaction');
+
 const { body, validationResult } = require("express-validator");
 
 // Transaction

@@ -32,7 +32,7 @@ router.post('/forms/general', formsController.General);
 
 // Services
 router.get('/services', servicesControllers.Home);
-router.get('/services/repairs', servicesControllers.Repairs);
+// router.get('/services/repairs', servicesControllers.Repairs);
 
 // router.post('/services', servicesControllers.Create);
 

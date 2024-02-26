@@ -1,5 +1,9 @@
 const { body, validationResult } = require("express-validator");
-const ServicesModel = require("../models/services");
+// const ServicesModel = require("../models/services");
+
+const serviceDbConnection = require('../models/connections/service');
+const ServicesModel = serviceDbConnection.model('listservice');
+
 
 const Home = function (req, res, next) {
   ServicesModel.find()
@@ -13,6 +17,7 @@ const Home = function (req, res, next) {
     .catch((err) => res.send(err));
 };
 
+/*
 const Repairs = function (req, res, next) {
   RepairsModel.find()
     .then((result) => {
@@ -24,6 +29,7 @@ const Repairs = function (req, res, next) {
     })
     .catch((err) => res.send(err));
 };
+*/
 
 /*
 const Create = [
@@ -47,5 +53,5 @@ const Create = [
 */
 module.exports = {
   Home,
-  Repairs
+ // Repairs
 };

@@ -1,3 +1,4 @@
+/*
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -13,4 +14,4 @@ const FormsSchema = new Schema(
 const Forms = mongoose.model("Services", FormsSchema);
 
 module.exports = Forms;
-
+*/ 

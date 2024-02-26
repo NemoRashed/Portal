@@ -1,3 +1,4 @@
+require("dotenv").config();
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -7,7 +8,12 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 
 // Stuff i just added
-var User = require("./models/user");
+// var User = require("./models/user");
+
+const portalDbConnection = require('./models/connections/portal.js');
+var User = portalDbConnection.model('User');
+
+
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -16,13 +22,11 @@ const bcrypt = require("bcryptjs");
 var app = express();
 
 // DB Connection - New
-require("dotenv").config();
 var mongoose = require("mongoose");
 const mongoDB = process.env.MONGODB_URI;
-
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(mongoDB)
+  .connect(mongoDB,{dbName: 'portal'})
   .then(() => {
     console.log("MongoDB connected…");
   })
@@ -112,3 +116,33 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+
+/*
+
+// DB Connection - New
+require("dotenv").config();
+var mongoose = require("mongoose");
+const mongoDB = process.env.MONGODB_URI;
+
+mongoose.set("strictQuery", false);
+mongoose
+  .connect(mongoDB)
+  .then(() => {
+    console.log("MongoDB connected…");
+  })
+  .catch((err) => console.log(err)); // mongoose
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+// Ended DB Stuff - New
+
+
+
+
+mongoose
+  .connect(mongoDB,{dbName: 'play'})
+*/
+
+
+
+

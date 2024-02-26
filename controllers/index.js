@@ -1,5 +1,7 @@
-const UserModel = require("../models/user.js");
-const TransactionModel = require("../models/transaction");
+// const UserModel = require("../models/user.js");
+const portalDbConnection = require('../models/connections/portal');
+const UserModel = portalDbConnection.model('User');
+
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");

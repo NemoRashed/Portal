@@ -1,6 +1,6 @@
 // const { body, validationResult } = require("express-validator");
 // const FormsModel = require("../models/forms.js");
-
+/*
 const Home = function (req, res, next) {
   res.render("forms/index", {
     title: "forms",
@@ -16,3 +16,4 @@ module.exports = {
   Home,
   General
 };
+*/
