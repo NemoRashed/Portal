@@ -11,41 +11,35 @@
   </head>
 
   <body>
-    <%- include('../components/header.ejs') %>
+    <%- include('../../../../components/header.ejs') %>
 
-    <h1>Services</h1>
-
-
+    <h1>IPhones</h1>
 
 
-    <% if (services && services.length > 0){ %> 
 
-<% services.forEach(serv => { %>
+
+    <% if (iphones && iphones.length > 0){ %> 
+
+<% iphones.forEach(iphone => { %>
         <figure className="">
-          <a href= <%=`/services/${serv.url}` %> >
+          <a href= <%=`/services/repairs/apple/iphone/${iphone.url}` %> >
             <image
-              src=<%= `/images/services/${serv.image}.png` %>
-              alt= <%= serv.name %>
+              src=<%= `/images/services/repairs/apple/iphone/${iphone.image}` %>
+              alt= <%= iphone.name %>
               width="200"
               height="200"
             />
           </a>
-          <figcaption><%= serv.name %></figcaption>
+          <figcaption><%= iphone.series %></figcaption>
         </figure>
 
        
       <% }) %> 
       <% } else { %>
-      <p class="noTransactions">There are no services to display. </p>
+      <p>There are no iphone to display. </p>
       <% } %>
  
     
-    <%- include('../components/footer.ejs') %>
+    <%- include('../../../../components/footer.ejs') %>
   </body>
 </html>
-
-
-
-
-
-
