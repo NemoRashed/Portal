@@ -6,13 +6,12 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
+var databaseRouter = require("./routes/database");
+var servicesRouter = require("./routes/services");
+var transactionRouter = require("./routes/transaction");
 
-// Stuff i just added
-// var User = require("./models/user");
-
-const portalDbConnection = require('./models/connections/portal.js');
-var User = portalDbConnection.model('User');
-
+const portalDbConnection = require("./models/connections/portal.js");
+var User = portalDbConnection.model("User");
 
 const session = require("express-session");
 const passport = require("passport");
@@ -26,7 +25,7 @@ var mongoose = require("mongoose");
 const mongoDB = process.env.MONGODB_URI;
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(mongoDB,{dbName: 'portal'})
+  .connect(mongoDB, { dbName: "portal" })
   .then(() => {
     console.log("MongoDB connected…");
   })
@@ -97,7 +96,11 @@ app.use(function (req, res, next) {
 
 // End Passport stuff
 
+// Routes
 app.use("/", indexRouter);
+app.use("/", databaseRouter);
+app.use("/", servicesRouter);
+app.use("/", transactionRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -116,33 +119,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-
-
-/*
-
-// DB Connection - New
-require("dotenv").config();
-var mongoose = require("mongoose");
-const mongoDB = process.env.MONGODB_URI;
-
-mongoose.set("strictQuery", false);
-mongoose
-  .connect(mongoDB)
-  .then(() => {
-    console.log("MongoDB connected…");
-  })
-  .catch((err) => console.log(err)); // mongoose
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-// Ended DB Stuff - New
-
-
-
-
-mongoose
-  .connect(mongoDB,{dbName: 'play'})
-*/
-
-
-
-
