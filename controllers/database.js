@@ -18,6 +18,15 @@ const WatchModelDatabase2 = databaseDbConnection.model("watchtransfer");
 const ListWatchModelDatabase = databaseDbConnection.model("listwatch");
 const ListWatchModelDatabase2 = databaseDbConnection.model("listwatchtransfer");
 
+// Sony
+const sonyDbConnection = require("../models/connections/sony");
+const ConsoleModelSony = sonyDbConnection.model("console");
+
+const ConsoleModelDatabase = databaseDbConnection.model("console");
+const ConsoleModelDatabase2 = databaseDbConnection.model("consoletransfer");
+
+
+
 // Home
 const Home = function (req, res, next) {
   res.render("database/index", {
@@ -28,8 +37,8 @@ const Home = function (req, res, next) {
 
 // Transfer Collections to Database
 const TransferCollections = function (req, res, next) {
-  ListWatchModelApple.find().then((result) => {
-    ListWatchModelDatabase.insertMany(result);
+  ConsoleModelSony.find().then((result) => {
+    ConsoleModelDatabase.insertMany(result);
   });
   res.render("database/[id]", {
     title: "transfercollections",
@@ -39,8 +48,8 @@ const TransferCollections = function (req, res, next) {
 
 // Update Reg Collections & Transfered to database
 const UpdateCollections = function (req, res, next) {
-  /*
-  WatchModelApple.find().then((result) => {
+  
+  ConsoleModelSony.find().then((result) => {
     let bang = [];
     result.forEach((item) => {
       for (const key in item.repairs) {
@@ -48,11 +57,12 @@ const UpdateCollections = function (req, res, next) {
       }
       bang.push(item);
     });
-    WatchModelDatabase2.insertMany(bang);
+    ConsoleModelDatabase2.insertMany(bang);
   });
-*/
+
 
   // Update List type Collections
+  /*
   ListWatchModelApple.find().then((result) => {
     let bang = [];
     result.forEach((item) => {
@@ -67,7 +77,7 @@ const UpdateCollections = function (req, res, next) {
     console.log(bang);
    ListWatchModelDatabase2.insertMany(bang);
   });
-
+*/
 
   res.render("database/[id]", {
     title: "UpdateCollections",
@@ -78,8 +88,8 @@ const UpdateCollections = function (req, res, next) {
 
 // Move New Key Updated collections to original
 const NewCollections = function (req, res, next) {
-  ListWatchModelDatabase2.find().then((result) => {
-    ListWatchModelApple.insertMany(result);
+  ConsoleModelDatabase2.find().then((result) => {
+    ConsoleModelSony.insertMany(result);
   });
   res.render("database/[id]", {
     title: "NewCollections",
@@ -111,6 +121,14 @@ const ChangeURLANDSRC = function (req, res, next) {
     user: req.user,
   });
 };
+
+
+
+
+
+
+
+
 
 module.exports = {
   Home,

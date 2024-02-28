@@ -14,5 +14,9 @@ conn.model('watchtransfer', require('../schemas/watch'),'watchtransfer');
 conn.model('listwatch', require('../schemas/listwatch'),'listwatch');
 conn.model('listwatchtransfer', require('../schemas/listwatch2'),'listwatchtransfer');
 
+
+conn.model('console', require('../schemas/sony/console'),'console');
+conn.model('consoletransfer', require('../schemas/sony/console'),'consoletransfer');
+
 module.exports = conn;
 

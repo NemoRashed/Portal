@@ -35,4 +35,21 @@ router.get("/services/repairs/apple/macbook", servicesControllers.Macbook);
 // Samsung
 //-------------------
 
+// Sony
+//-------------------
+router.get("/services/repairs/sony", servicesControllers.Sony);
+
+router.get(
+  "/services/repairs/sony/consoles",
+  servicesControllers.ConsoleSeries
+);
+router.get(
+  "/services/repairs/sony/consoles/:con",
+  servicesControllers.Console
+);
+router.post(
+  "/services/repairs/sony/consoles/:con",
+  servicesControllers.ConsolePOST
+);
+
 module.exports = router;
