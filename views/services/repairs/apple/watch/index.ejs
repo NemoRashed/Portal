@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/services.css" />
+  </head>
+
+  <body>
+    <%- include('../../../../components/header.ejs') %>
+
+    <h1>Watch</h1>
+
+
+
+
+    <% if (watchs && watchs.length > 0){ %> 
+
+<% watchs.forEach(watch => { %>
+        <figure className="">
+          <a href= <%=`/services/repairs/apple/watch/${watch.url}` %> >
+            <image
+              src=<%= `/images/services/repairs/apple/watch/${watch.image}` %>
+              alt= <%= watch.name %>
+              width="200"
+              height="200"
+            />
+          </a>
+          <figcaption><%= watch.series %></figcaption>
+        </figure>
+
+       
+      <% }) %> 
+      <% } else { %>
+      <p>There are no watch to display. </p>
+      <% } %>
+ 
+    
+    <%- include('../../../../components/footer.ejs') %>
+  </body>
+</html>

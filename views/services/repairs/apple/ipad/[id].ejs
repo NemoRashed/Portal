@@ -66,10 +66,10 @@
   
     <input type="hidden" name="url" value= <%= title %>
     />
-  <label for="name">Choose a Repair</label>
-  <select id="name" name="name" size="1">
+  <label for="key">Choose a Repair</label>
+  <select id="key" name="key" size="1">
     <% repairs.forEach(p => { %>
-    <option value=<%=  p.name %>> <%=  p.name %> </option>
+    <option value=<%=  p.key %>> <%=  p.name %> </option>
       <% }) %> 
   </select>
   

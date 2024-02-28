@@ -12,23 +12,23 @@
   <body>
     <%- include('../../../../components/header.ejs') %>
 
-    <h1> <%= iphone.model %> </h1>
+    <h1> <%= watch.model %> </h1>
 
     <image
-    src=<%= `/images/services/repairs/apple/iphone/${iphone.image}` %>
-    alt= <%= iphone.model %>
+    src=<%= `/images/services/repairs/apple/watch/${watch.image}` %>
+    alt= <%= watch.model %>
     width="200"
     height="200"
-    alt="Phone Image"
+    alt="Watch Image"
   />
 
 
 
   
-    <% if (iphone){ %> 
+    <% if (watch){ %> 
         <table >
             <caption >
-                <%=   iphone.model %>
+                <%=   watch.model %>
             </caption>
             <thead>
               <tr>
@@ -57,7 +57,7 @@
 
       <form
       class=""
-      action="/services/repairs/apple/iphone/:phone"
+      action="/services/repairs/apple/watch/:wat"
       method="POST"
       autocomplete="on"
     >
