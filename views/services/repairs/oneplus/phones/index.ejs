@@ -13,30 +13,30 @@
   <body>
     <%- include('../../../../components/header.ejs') %>
 
-    <h1>Consoles</h1>
+    <h1>Phones</h1>
 
 
 
 
-    <% if (consoles && consoles.length > 0){ %> 
+    <% if (phones && phones.length > 0){ %> 
 
-<% consoles.forEach(console => { %>
+<% phones.forEach(phone => { %>
         <figure className="">
-          <a href= <%=`/services/repairs/sony/consoles/${console.url}` %> >
+          <a href= <%=`/services/repairs/oneplus/phones/${phone.url}` %> >
             <image
-              src=<%= `/images/services/repairs/sony/consoles/${console.image}` %>
-              alt= <%= console.series %>
+              src=<%= `/images/services/repairs/oneplus/phones/${phone.image}` %>
+              alt= <%= phone.series %>
               width="200"
               height="200"
             />
           </a>
-          <figcaption><%= console.series %></figcaption>
+          <figcaption><%= phone.series %></figcaption>
         </figure>
 
        
       <% }) %> 
       <% } else { %>
-      <p>There are no consoles to display. </p>
+      <p>There are no Phones to display. </p>
       <% } %>
  
     

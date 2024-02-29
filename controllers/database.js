@@ -1,31 +1,14 @@
-const appleDbConnection = require("../models/connections/apple");
-const IpadModelApple = appleDbConnection.model("ipad");
-const IphoneModelApple = appleDbConnection.model("iphone");
-const WatchModelApple = appleDbConnection.model("watch");
-const ListWatchModelApple = appleDbConnection.model("listwatch");
-
-// Data Base Models
+// DataBase 
 const databaseDbConnection = require("../models/connections/database");
-const IpadModelDatabase = databaseDbConnection.model("ipad");
-const IpadModelDatabase2 = databaseDbConnection.model("ipadtransfer");
+// OnePlus 
+const oneplusDbConnection = require("../models/connections/oneplus");
 
-const IphoneModelDatabase = databaseDbConnection.model("iphone");
-const IphoneModelDatabase2 = databaseDbConnection.model("iphonetransfer");
+// Main Model 
+const PhoneModelOneplus = oneplusDbConnection.model("phone");
 
-const WatchModelDatabase = databaseDbConnection.model("watch");
-const WatchModelDatabase2 = databaseDbConnection.model("watchtransfer");
-
-const ListWatchModelDatabase = databaseDbConnection.model("listwatch");
-const ListWatchModelDatabase2 = databaseDbConnection.model("listwatchtransfer");
-
-// Sony
-const sonyDbConnection = require("../models/connections/sony");
-const ConsoleModelSony = sonyDbConnection.model("console");
-
-const ConsoleModelDatabase = databaseDbConnection.model("console");
-const ConsoleModelDatabase2 = databaseDbConnection.model("consoletransfer");
-
-
+// Database Models
+const PhoneModelDatabase = databaseDbConnection.model("phone");
+const PhoneModelDatabaseTransfer = databaseDbConnection.model("phonetransfer");
 
 
 
@@ -40,8 +23,8 @@ const Home = function (req, res, next) {
 
 // Transfer Collections to Database
 const TransferCollections = function (req, res, next) {
-  ConsoleModelSony.find().then((result) => {
-    ConsoleModelDatabase.insertMany(result);
+  PhoneModelOneplus.find().then((result) => {
+    PhoneModelDatabase.insertMany(result);
   });
   res.render("database/[id]", {
     title: "transfercollections",
@@ -52,7 +35,7 @@ const TransferCollections = function (req, res, next) {
 // Update Reg Collections & Transfered to database
 const UpdateCollections = function (req, res, next) {
   
-  ConsoleModelSony.find().then((result) => {
+  PhoneModelOneplus.find().then((result) => {
     let bang = [];
     result.forEach((item) => {
       for (const key in item.repairs) {
@@ -60,7 +43,7 @@ const UpdateCollections = function (req, res, next) {
       }
       bang.push(item);
     });
-    ConsoleModelDatabase2.insertMany(bang);
+    PhoneModelDatabaseTransfer.insertMany(bang);
   });
 
 
@@ -91,8 +74,8 @@ const UpdateCollections = function (req, res, next) {
 
 // Move New Key Updated collections to original
 const NewCollections = function (req, res, next) {
-  ConsoleModelDatabase2.find().then((result) => {
-    ConsoleModelSony.insertMany(result);
+  PhoneModelDatabaseTransfer.find().then((result) => {
+    PhoneModelOneplus.insertMany(result);
   });
   res.render("database/[id]", {
     title: "NewCollections",

@@ -101,8 +101,8 @@ var databaseRouter = require("./routes/database");
 var servicesRouter = require("./routes/services/index");
 var repairsRouter = require("./routes/services/repairs/index");
 var appleRouter = require("./routes/services/repairs/apple/index");
- var sonyRouter = require("./routes/services/repairs/sony/index");
-// var oneplusRouter = require("./routes/services/repairs/oneplus/index");
+var sonyRouter = require("./routes/services/repairs/sony/index");
+var oneplusRouter = require("./routes/services/repairs/oneplus/index");
 
 // Routes
 app.use("/", indexRouter);
@@ -110,10 +110,9 @@ app.use("/", transactionRouter);
 app.use("/", databaseRouter);
 app.use("/", servicesRouter);
 app.use("/", repairsRouter);
- app.use("/", appleRouter);
- app.use("/", sonyRouter);
-// app.use("/", oneplusRouter);
-
+app.use("/", appleRouter);
+app.use("/", sonyRouter);
+app.use("/", oneplusRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

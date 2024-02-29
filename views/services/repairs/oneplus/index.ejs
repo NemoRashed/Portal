@@ -11,35 +11,34 @@
   </head>
 
   <body>
-    <%- include('../../../../components/header.ejs') %>
+    <%- include('../../../components/header.ejs') %>
 
-    <h1>Consoles</h1>
-
-
+    <h1>Oneplus</h1>
 
 
-    <% if (consoles && consoles.length > 0){ %> 
 
-<% consoles.forEach(console => { %>
+    <% if (ones && ones.length > 0){ %> 
+
+<% ones.forEach(one => { %>
         <figure className="">
-          <a href= <%=`/services/repairs/sony/consoles/${console.url}` %> >
+          <a href= <%=`/services/repairs/oneplus/${one.url}` %> >
             <image
-              src=<%= `/images/services/repairs/sony/consoles/${console.image}` %>
-              alt= <%= console.series %>
+              src=<%= `/images/services/repairs/oneplus/${one.image}` %>
+              alt= <%= one.category %>
               width="200"
               height="200"
             />
           </a>
-          <figcaption><%= console.series %></figcaption>
+          <figcaption><%= one.category %></figcaption>
         </figure>
 
        
       <% }) %> 
       <% } else { %>
-      <p>There are no consoles to display. </p>
+      <p>There are no Oneplus to display. </p>
       <% } %>
  
     
-    <%- include('../../../../components/footer.ejs') %>
+    <%- include('../../../components/footer.ejs') %>
   </body>
 </html>

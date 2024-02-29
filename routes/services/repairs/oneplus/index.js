@@ -10,15 +10,15 @@ router.get("/services/repairs/oneplus", OneplusControllers.Oneplus);
 
 router.get(
   "/services/repairs/oneplus/phones",
-  OneplusControllers.ConsoleSeries
+  OneplusControllers.PhoneSeries
 );
 router.get(
   "/services/repairs/oneplus/phones/:phon",
-  OneplusControllers.Console
+  OneplusControllers.Phone
 );
 router.post(
   "/services/repairs/oneplus/phones/:phon",
-  OneplusControllers.ConsolePOST
+  OneplusControllers.PhonePOST
 );
 
 
