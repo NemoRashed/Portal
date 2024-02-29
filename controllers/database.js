@@ -1,17 +1,14 @@
-// DataBase 
+// DataBase
 const databaseDbConnection = require("../models/connections/database");
-// OnePlus 
-const oneplusDbConnection = require("../models/connections/oneplus");
+// Google
+const googleDbConnection = require("../models/connections/google");
 
-// Main Model 
-const PhoneModelOneplus = oneplusDbConnection.model("phone");
+// Main Model
+const PixelModelGoogle = googleDbConnection.model("pixel");
 
 // Database Models
-const PhoneModelDatabase = databaseDbConnection.model("phone");
-const PhoneModelDatabaseTransfer = databaseDbConnection.model("phonetransfer");
-
-
-
+const PixelModelDatabase = databaseDbConnection.model("pixel");
+const PixelModelDatabaseTransfer = databaseDbConnection.model("pixeltransfer");
 
 // Home
 const Home = function (req, res, next) {
@@ -23,8 +20,8 @@ const Home = function (req, res, next) {
 
 // Transfer Collections to Database
 const TransferCollections = function (req, res, next) {
-  PhoneModelOneplus.find().then((result) => {
-    PhoneModelDatabase.insertMany(result);
+  PixelModelGoogle.find().then((result) => {
+    PixelModelDatabase.insertMany(result);
   });
   res.render("database/[id]", {
     title: "transfercollections",
@@ -34,8 +31,8 @@ const TransferCollections = function (req, res, next) {
 
 // Update Reg Collections & Transfered to database
 const UpdateCollections = function (req, res, next) {
-  
-  PhoneModelOneplus.find().then((result) => {
+  /*
+  ListPixelModelGoogle.find().then((result) => {
     let bang = [];
     result.forEach((item) => {
       for (const key in item.repairs) {
@@ -43,44 +40,85 @@ const UpdateCollections = function (req, res, next) {
       }
       bang.push(item);
     });
-    PhoneModelDatabaseTransfer.insertMany(bang);
+    ListPixelModelDatabaseTransfer.insertMany(bang);
   });
 
-
+*/
   // Update List type Collections
   /*
-  ListWatchModelApple.find().then((result) => {
-    let bang = [];
-    result.forEach((item) => {
-      bang.push({
+List types 
         _id: item._id,
         series: item.series,
         image: item.src,
         url: item.href,
         rank: item.rank,
+        
+  Regular Series 
+
+  */
+  PixelModelGoogle.find().then((result) => {
+    let bang = [];
+    result.forEach((item) => {
+      bang.push({
+        _id: item._id,
+        model: item.model,
+        image: item.src,
+        url: item.href,
+        description: item.description,
+        repairs: item.repairs,
       });
     });
     console.log(bang);
-   ListWatchModelDatabase2.insertMany(bang);
+    PixelModelDatabaseTransfer.insertMany(bang);
   });
-*/
 
   res.render("database/[id]", {
     title: "UpdateCollections",
     user: req.user,
   });
-  
 };
 
 // Move New Key Updated collections to original
 const NewCollections = function (req, res, next) {
-  PhoneModelDatabaseTransfer.find().then((result) => {
-    PhoneModelOneplus.insertMany(result);
+
+  PixelModelDatabaseTransfer.find().then((result) => {
+    let bang = [];
+    result.forEach((item) => {
+      for (const key in item.repairs) {
+        item.repairs[key].key = key;
+      }
+      bang.push(item);
+    });
+    PixelModelGoogle.insertMany(bang);
+  });
+
+
+
+  /*
+  PixelModelDatabaseTransfer.find().then((result) => {
+    ListPixelModelGoogle.insertMany(result);
+  });
+
+*/
+  
+
+
+  res.render("database/[id]", {
+    title: "NewCollections",
+    user: req.user,
+  });
+
+
+/*
+  ListPixelModelDatabaseTransfer.find().then((result) => {
+    ListPixelModelGoogle.insertMany(result);
   });
   res.render("database/[id]", {
     title: "NewCollections",
     user: req.user,
   });
+
+  */
 };
 
 // Take Collections and Change the Href & src to Image & URL
@@ -107,14 +145,6 @@ const ChangeURLANDSRC = function (req, res, next) {
     user: req.user,
   });
 };
-
-
-
-
-
-
-
-
 
 module.exports = {
   Home,

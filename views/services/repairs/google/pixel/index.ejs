@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/services.css" />
+  </head>
+
+  <body>
+    <%- include('../../../../components/header.ejs') %>
+
+    <h1>Pixels</h1>
+
+
+
+
+    <% if (pixels && pixels.length > 0){ %> 
+
+<% pixels.forEach(pixel => { %>
+        <figure className="">
+          <a href= <%=`/services/repairs/google/pixel/${pixel.url}` %> >
+            <image
+              src=<%= `/images/services/repairs/google/pixel/${pixel.image}` %>
+              alt= <%= pixel.series %>
+              width="200"
+              height="200"
+            />
+          </a>
+          <figcaption><%= pixel.series %></figcaption>
+        </figure>
+
+       
+      <% }) %> 
+      <% } else { %>
+      <p>There are no pixels to display. </p>
+      <% } %>
+ 
+    
+    <%- include('../../../../components/footer.ejs') %>
+  </body>
+</html>

@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const conn = mongoose.createConnection(process.env.MONGODB_URI4);
 
-// Oneplus 
-conn.model('phone', require('../schemas/oneplus/phone'),'phone');
-conn.model('phonetransfer', require('../schemas/oneplus/phone'),'phonetransfer');
 
+// Google 
 
+ conn.model('pixel', require('../schemas/google/pixel'),'pixel');
+ conn.model('pixeltransfer', require('../schemas/google/pixel'),'pixeltransfer');
 
 module.exports = conn;
 
