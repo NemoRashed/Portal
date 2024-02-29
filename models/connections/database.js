@@ -4,12 +4,17 @@ const conn = mongoose.createConnection(process.env.MONGODB_URI, {
   dbName: "database",
 });
 
-// Google
-conn.model("pixel", require("../schemas/google/pixel"), "pixel");
+// Samsung
+
 conn.model(
-  "pixeltransfer",
-  require("../schemas/google/pixel"),
-  "pixeltransfer"
+  "listgalaxynote",
+  require("../schemas/samsung/oldlistgalaxynote"),
+  "listgalaxynote"
+);
+conn.model(
+  "listgalaxynotetransfer",
+  require("../schemas/samsung/listgalaxynote"),
+  "listgalaxynotetransfer"
 );
 
 module.exports = conn;

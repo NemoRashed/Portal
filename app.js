@@ -97,7 +97,7 @@ app.use(function (req, res, next) {
 // End Passport stuff
 var indexRouter = require("./routes/index");
 var transactionRouter = require("./routes/transaction");
-var databaseRouter = require("./routes/database");
+// var databaseRouter = require("./routes/database");
 var servicesRouter = require("./routes/services/index");
 var repairsRouter = require("./routes/services/repairs/index");
 var appleRouter = require("./routes/services/repairs/apple/index");
@@ -108,11 +108,12 @@ var nintendoRouter = require("./routes/services/repairs/nintendo/index");
 var LGRouter = require("./routes/services/repairs/lg/index");
 var GoogleRouter = require("./routes/services/repairs/google/index");
 var MicrosoftRouter = require("./routes/services/repairs/microsoft/index");
+var SamsungRouter = require("./routes/services/repairs/samsung/index");
 
 // Routes
 app.use("/", indexRouter);
 app.use("/", transactionRouter);
-app.use("/", databaseRouter);
+// app.use("/", databaseRouter);
 app.use("/", servicesRouter);
 app.use("/", repairsRouter);
 app.use("/", appleRouter);
@@ -123,6 +124,7 @@ app.use("/", nintendoRouter);
 app.use("/", LGRouter);
 app.use("/", GoogleRouter);
 app.use("/", MicrosoftRouter);
+app.use("/", SamsungRouter);
 
 
 // catch 404 and forward to error handler

@@ -1,15 +1,16 @@
 // DataBase
+/*
 const databaseDbConnection = require("../models/connections/database");
 // Google
-const googleDbConnection = require("../models/connections/google");
+const samsungDbConnection = require("../models/connections/samsung");
 
 // Main Model
-const PixelModelGoogle = googleDbConnection.model("pixel");
+const ListGalaxyNoteModelSamsung = samsungDbConnection.model("listgalaxynote");
 
 // Database Models
-const PixelModelDatabase = databaseDbConnection.model("pixel");
-const PixelModelDatabaseTransfer = databaseDbConnection.model("pixeltransfer");
-
+const ListGalaxyNoteModelDatabase = databaseDbConnection.model("listgalaxynote");
+// const ListGalaxyNoteModelDatabaseTransfer = databaseDbConnection.model("listgalaxynotetransfer");
+*/
 // Home
 const Home = function (req, res, next) {
   res.render("database/index", {
@@ -20,8 +21,8 @@ const Home = function (req, res, next) {
 
 // Transfer Collections to Database
 const TransferCollections = function (req, res, next) {
-  PixelModelGoogle.find().then((result) => {
-    PixelModelDatabase.insertMany(result);
+  ListGalaxyNoteModelSamsung.find().then((result) => {
+    ListGalaxyNoteModelDatabase.insertMany(result);
   });
   res.render("database/[id]", {
     title: "transfercollections",
@@ -54,22 +55,27 @@ List types
         rank: item.rank,
         
   Regular Series 
-
-  */
-  PixelModelGoogle.find().then((result) => {
-    let bang = [];
-    result.forEach((item) => {
-      bang.push({
-        _id: item._id,
+  _id: item._id,
         model: item.model,
         image: item.src,
         url: item.href,
         description: item.description,
         repairs: item.repairs,
+  */
+ 
+ ListGalaxyNoteModelSamsung.find().then((result) => {
+    let bang = [];
+    result.forEach((item) => {
+      bang.push({
+        _id: item._id,
+        series: item.series,
+        image: item.src,
+        url: item.href,
+        rank: item.rank
       });
     });
     console.log(bang);
-    PixelModelDatabaseTransfer.insertMany(bang);
+  ListGalaxyNoteModelDatabaseTransfer.insertMany(bang);
   });
 
   res.render("database/[id]", {
@@ -80,8 +86,8 @@ List types
 
 // Move New Key Updated collections to original
 const NewCollections = function (req, res, next) {
-
-  PixelModelDatabaseTransfer.find().then((result) => {
+  /*
+  ListGalaxySModelDatabaseTransfer.find().then((result) => {
     let bang = [];
     result.forEach((item) => {
       for (const key in item.repairs) {
@@ -89,17 +95,17 @@ const NewCollections = function (req, res, next) {
       }
       bang.push(item);
     });
-    PixelModelGoogle.insertMany(bang);
+    GalaxySModelSamsung.insertMany(bang);
   });
-
-
-
-  /*
-  PixelModelDatabaseTransfer.find().then((result) => {
-    ListPixelModelGoogle.insertMany(result);
-  });
-
 */
+
+
+
+ListGalaxyNoteModelDatabaseTransfer.find().then((result) => {
+  ListGalaxyNoteModelSamsung.insertMany(result);
+  });
+
+
   
 
 
