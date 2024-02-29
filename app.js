@@ -4,12 +4,12 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+/*
 var indexRouter = require("./routes/index");
 var databaseRouter = require("./routes/database");
 var servicesRouter = require("./routes/services");
 var transactionRouter = require("./routes/transaction");
-
+*/
 const portalDbConnection = require("./models/connections/portal.js");
 var User = portalDbConnection.model("User");
 
@@ -95,12 +95,25 @@ app.use(function (req, res, next) {
 });
 
 // End Passport stuff
+var indexRouter = require("./routes/index");
+var transactionRouter = require("./routes/transaction");
+var databaseRouter = require("./routes/database");
+var servicesRouter = require("./routes/services/index");
+var repairsRouter = require("./routes/services/repairs/index");
+var appleRouter = require("./routes/services/repairs/apple/index");
+ var sonyRouter = require("./routes/services/repairs/sony/index");
+// var oneplusRouter = require("./routes/services/repairs/oneplus/index");
 
 // Routes
 app.use("/", indexRouter);
+app.use("/", transactionRouter);
 app.use("/", databaseRouter);
 app.use("/", servicesRouter);
-app.use("/", transactionRouter);
+app.use("/", repairsRouter);
+ app.use("/", appleRouter);
+ app.use("/", sonyRouter);
+// app.use("/", oneplusRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
