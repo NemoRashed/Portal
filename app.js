@@ -105,6 +105,7 @@ var sonyRouter = require("./routes/services/repairs/sony/index");
 var oneplusRouter = require("./routes/services/repairs/oneplus/index");
 var motorolaRouter = require("./routes/services/repairs/motorola/index");
 var nintendoRouter = require("./routes/services/repairs/nintendo/index");
+var LGRouter = require("./routes/services/repairs/lg/index");
 
 // Routes
 app.use("/", indexRouter);
@@ -117,6 +118,7 @@ app.use("/", sonyRouter);
 app.use("/", oneplusRouter);
 app.use("/", motorolaRouter);
 app.use("/", nintendoRouter);
+app.use("/", LGRouter);
 
 
 // catch 404 and forward to error handler
