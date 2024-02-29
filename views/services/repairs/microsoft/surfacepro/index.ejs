@@ -11,35 +11,35 @@
   </head>
 
   <body>
-    <%- include('../../components/header.ejs') %>
+    <%- include('../../../../components/header.ejs') %>
 
-    <h1>Repairs</h1>
-
-
+    <h1>Surfacepro</h1>
 
 
-    <% if (repairs && repairs.length > 0){ %> 
 
-<% repairs.forEach(rep => { %>
+
+    <% if (surfacepros && surfacepros.length > 0){ %> 
+
+<% surfacepros.forEach(surfacepro => { %>
         <figure className="">
-          <a href= <%=`/services/repairs/${rep.url}` %> >
+          <a href= <%=`/services/repairs/microsoft/surfacepro/${surfacepro.url}` %> >
             <image
-              src=<%= `/images/services/repairs/${rep.image}.png` %>
-              alt= <%= rep.name %>
+              src=<%= `/images/services/repairs/microsoft/surfacepro/${surfacepro.image}` %>
+              alt= <%= surfacepro.name %>
               width="200"
               height="200"
             />
           </a>
-          <figcaption><%= rep.brand %></figcaption>
+          <figcaption><%= surfacepro.series %></figcaption>
         </figure>
 
        
       <% }) %> 
       <% } else { %>
-      <p>There are no repairs to display. </p>
+      <p>There are no surfacepro to display. </p>
       <% } %>
  
     
-    <%- include('../../components/footer.ejs') %>
+    <%- include('../../../../components/footer.ejs') %>
   </body>
 </html>

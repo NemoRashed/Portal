@@ -11,35 +11,35 @@
   </head>
 
   <body>
-    <%- include('../../components/header.ejs') %>
+    <%- include('../../../components/header.ejs') %>
 
-    <h1>Repairs</h1>
-
-
+    <h1>Microsoft</h1>
 
 
-    <% if (repairs && repairs.length > 0){ %> 
 
-<% repairs.forEach(rep => { %>
+
+    <% if (microsofts && microsofts.length > 0){ %> 
+
+<% microsofts.forEach(microsoft => { %>
         <figure className="">
-          <a href= <%=`/services/repairs/${rep.url}` %> >
+          <a href= <%=`/services/repairs/microsoft/${microsoft.url}` %> >
             <image
-              src=<%= `/images/services/repairs/${rep.image}.png` %>
-              alt= <%= rep.name %>
+              src=<%= `/images/services/repairs/microsoft/${microsoft.image}` %>
+              alt= <%= microsoft.category %>
               width="200"
               height="200"
             />
           </a>
-          <figcaption><%= rep.brand %></figcaption>
+          <figcaption><%= microsoft.category %></figcaption>
         </figure>
 
        
       <% }) %> 
       <% } else { %>
-      <p>There are no repairs to display. </p>
+      <p>There are no microsoft to display. </p>
       <% } %>
  
     
-    <%- include('../../components/footer.ejs') %>
+    <%- include('../../../components/footer.ejs') %>
   </body>
 </html>
