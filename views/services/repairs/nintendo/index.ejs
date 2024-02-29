@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/services.css" />
+  </head>
+
+  <body>
+    <%- include('../../../components/header.ejs') %>
+
+    <h1>Nintendo</h1>
+
+
+
+    <% if (nintendos && nintendos.length > 0){ %> 
+
+<% nintendos.forEach(nintendo => { %>
+        <figure className="">
+          <a href= <%=`/services/repairs/nintendo/${nintendo.url}` %> >
+            <image
+              src=<%= `/images/services/repairs/nintendo/${nintendo.image}` %>
+              alt= <%= nintendo.category %>
+              width="200"
+              height="200"
+            />
+          </a>
+          <figcaption><%= nintendo.category %></figcaption>
+        </figure>
+
+       
+      <% }) %> 
+      <% } else { %>
+      <p>There are no nintendo to display. </p>
+      <% } %>
+ 
+    
+    <%- include('../../../components/footer.ejs') %>
+  </body>
+</html>
