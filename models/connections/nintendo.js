@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const conn = mongoose.createConnection(process.env.MONGODB_URI5,{dbName: 'nintendo'});
+const conn = mongoose.createConnection(process.env.MONGODB_URI,{dbName: 'nintendo'});
+
 conn.model('listnintendo', require('../schemas/nintendo/listnintendo'),'listnintendo');
 
 conn.model('listconsole', require('../schemas/nintendo/listconsole'),'listconsole');

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const conn = mongoose.createConnection(process.env.MONGODB_URI5,{dbName: 'lg'});
+const conn = mongoose.createConnection(process.env.MONGODB_URI,{dbName: 'lg'});
+
 conn.model('listlg', require('../schemas/lg/listlg'),'listlg');
 
 conn.model('listphone', require('../schemas/lg/listphone'),'listphone');

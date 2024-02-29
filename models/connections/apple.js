@@ -1,17 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const conn = mongoose.createConnection(process.env.MONGODB_URI3);
-conn.model('listapple', require('../schemas/listapple'),'listapple');
+const conn = mongoose.createConnection(process.env.MONGODB_URI, {dbName: 'apple'});
+conn.model("listapple", require("../schemas/apple/listapple"), "listapple");
 
-conn.model('listiphone', require('../schemas/listiphone'),'listiphone');
-conn.model('iphone', require('../schemas/iphone'),'iphone');
+conn.model("listiphone", require("../schemas/apple/listiphone"), "listiphone");
+conn.model("iphone", require("../schemas/apple/iphone"), "iphone");
 
-conn.model('listipad', require('../schemas/listipad'),'listipad');
-conn.model('ipad', require('../schemas/ipad'),'ipad');
+conn.model("listipad", require("../schemas/apple/listipad"), "listipad");
+conn.model("ipad", require("../schemas/apple/ipad"), "ipad");
 
-conn.model('listwatch', require('../schemas/listwatch'),'listwatch');
-conn.model('watch', require('../schemas/watch'),'watch');
+conn.model("listwatch", require("../schemas/apple/listwatch"), "listwatch");
+conn.model("watch", require("../schemas/apple/watch"), "watch");
 
 module.exports = conn;
-
-// {dbName: 'apple'}
