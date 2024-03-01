@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/services.css" />
+  </head>
+
+  <body>
+    <%- include('../../components/header.ejs') %>
+
+ 
+    <h1> <%= unlock.name %> </h1>
+
+    <image
+    src=<%= `/images/services/${unlock.image}` %>
+    alt= <%= unlock.name %>
+    width="200"
+    height="200"
+    alt="unlock Image"
+  />
+
+
+
+  
+    <% if (unlock){ %> 
+        <table >
+            <caption >
+                <%=   unlock.name %>
+            </caption>
+            <thead>
+              <tr>
+                <th>Type of Repair</th>
+                <th>Price</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+        
+
+            <tbody>
+              <% types.forEach(p => { %>
+                <tr >
+                  <td> <%=  p.name %></td>
+                  <td> <%= p.price %></td>
+                  <td> <%= p.time + ' Mins' %></td>
+                </tr>
+          
+                <% }) %> 
+          </tbody>
+          </table>
+      <% } %> 
+    
+ 
+
+
+      <form
+      class=""
+      action="/services/unlocks"
+      method="POST"
+      autocomplete="on"
+    >
+    <h2>Edit</h2>
+  
+  
+    <input type="hidden" name="url" value= <%= title %>
+    />
+  <label for="key">Choose a Type</label>
+  <select id="key" name="key" size="1">
+    <% types.forEach(p => { %>
+    <option value=<%=  p.key %>> <%=  p.name %> </option>
+      <% }) %> 
+  </select>
+  
+  
+  
+        <label for="price"> Price </label>
+        <input
+          name="price"
+          type="text"
+          autocomplete="price"
+          autofocus
+          required
+        />
+  
+        <label for="time"> Time </label>
+        <input
+          name='time'
+          type="text"
+          autocomplete='time'
+          autofocus
+          required
+        />
+      </section>
+  
+      <button type="submit">Submit</button>
+    </form>
+  
+  
+
+  
+    
+
+    <%- include('../../components/footer.ejs') %>
+  </body>
+</html>

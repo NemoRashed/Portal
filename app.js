@@ -109,6 +109,12 @@ var LGRouter = require("./routes/services/repairs/lg/index");
 var GoogleRouter = require("./routes/services/repairs/google/index");
 var MicrosoftRouter = require("./routes/services/repairs/microsoft/index");
 var SamsungRouter = require("./routes/services/repairs/samsung/index");
+var CustomizationRouter = require("./routes/services/customization/index");
+var UnlocksRouter = require("./routes/services/unlocks/index");
+var DiagnosticsRouter = require("./routes/services/diagnostics/index");
+var CleaningRouter = require("./routes/services/cleaning/index");
+var BuybacksRouter = require("./routes/services/buybacks/index");
+var SoftwareRouter = require("./routes/services/software/index");
 
 // Routes
 app.use("/", indexRouter);
@@ -125,6 +131,12 @@ app.use("/", LGRouter);
 app.use("/", GoogleRouter);
 app.use("/", MicrosoftRouter);
 app.use("/", SamsungRouter);
+app.use("/", CustomizationRouter);
+app.use("/", UnlocksRouter);
+app.use("/", DiagnosticsRouter);
+app.use("/", CleaningRouter);
+app.use("/", BuybacksRouter);
+app.use("/", SoftwareRouter);
 
 
 // catch 404 and forward to error handler
