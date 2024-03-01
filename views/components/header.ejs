@@ -1,7 +1,7 @@
 <header>
   <div>
     <a href="/">
-      <img src="./images/favicon.png" alt="Favicon" width="100px"
+      <img class="favicon" src="./images/favicon.png" alt="Favicon" width="100px"
     /></a>
   </div>
 
@@ -33,7 +33,7 @@
     
     <a href="/logout">Log Out</a>
 
-    <img src="./images/<%= currentUser.avatar%>.svg" alt="A" width="20px" />
+      <img src="./images/<%= currentUser.avatar%>.svg" alt="A" width="20px" class="profile" /> 
 
     <%} else { %>
     <a href="/login">Login</a>

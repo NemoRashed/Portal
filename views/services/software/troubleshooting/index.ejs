@@ -7,7 +7,7 @@
     <title><%= title %></title>
     <link rel="icon" href="/images/favicon.png" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/services.css" />
+    <link rel="stylesheet" href="/stylesheets/id.css" />
   </head>
 
   <body>
@@ -16,13 +16,16 @@
  
     <h1> <%= troubleshooting.name %> </h1>
 
-    <image
+    <div class="container">
+         <image
     src=<%= `/images/services/software/${troubleshooting.image}` %>
     alt= <%= troubleshooting.name %>
     width="200"
     height="200"
     alt="troubleshooting Image"
   />
+    </div>
+ 
 
 
 

@@ -7,6 +7,8 @@
     <title><%= title %></title>
     <link rel="icon" href="/images/favicon.png" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/id.css" />
+
   </head>
 
   <body>
@@ -14,13 +16,17 @@
 
     <h1> <%= pixel.model %> </h1>
 
-    <image
+    <div class="container">
+       <image
     src=<%= `/images/services/repairs/google/pixel/${pixel.image}` %>
     alt= <%= pixel.model %>
     width="200"
     height="200"
     alt="pixel Image"
   />
+    </div>
+
+   
 
 
 

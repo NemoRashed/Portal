@@ -7,20 +7,24 @@
     <title><%= title %></title>
     <link rel="icon" href="/images/favicon.png" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/id.css" />
+
   </head>
 
   <body>
     <%- include('../../../../components/header.ejs') %>
 
     <h1> <%= xbox.model %> </h1>
-
-    <image
+    <div class="container">
+       <image
     src=<%= `/images/services/repairs/microsoft/xbox/${xbox.image}` %>
     alt= <%= xbox.model %>
     width="200"
     height="200"
     alt="Xbox Image"
   />
+    </div>
+   
 
 
 

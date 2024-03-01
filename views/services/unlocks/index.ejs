@@ -7,7 +7,7 @@
     <title><%= title %></title>
     <link rel="icon" href="/images/favicon.png" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/services.css" />
+    <link rel="stylesheet" href="/stylesheets/id.css" />
   </head>
 
   <body>
@@ -15,6 +15,8 @@
 
  
     <h1> <%= unlock.name %> </h1>
+
+    <div class="container">
 
     <image
     src=<%= `/images/services/${unlock.image}` %>
@@ -25,7 +27,7 @@
   />
 
 
-
+    </div>
   
     <% if (unlock){ %> 
         <table >

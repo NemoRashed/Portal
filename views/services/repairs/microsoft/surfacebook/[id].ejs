@@ -7,20 +7,24 @@
     <title><%= title %></title>
     <link rel="icon" href="/images/favicon.png" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/id.css" />
+
   </head>
 
   <body>
     <%- include('../../../../components/header.ejs') %>
 
     <h1> <%= surfacebook.model %> </h1>
-
-    <image
+    <div class="container">
+       <image
     src=<%= `/images/services/repairs/microsoft/surfacebook/${surfacebook.image}` %>
     alt= <%= surfacebook.model %>
     width="200"
     height="200"
     alt="surfacebook Image"
   />
+    </div>
+   
 
 
 
