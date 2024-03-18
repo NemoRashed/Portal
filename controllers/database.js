@@ -1,18 +1,30 @@
 // DataBase
-/*
+
 const databaseDbConnection = require("../models/connections/database");
 // Google
-const samsungDbConnection = require("../models/connections/samsung");
+const samsungDbConnection = require("../models/connections/product");
 
 // Main Model
-const ListGalaxyNoteModelSamsung = samsungDbConnection.model("listgalaxynote");
+// const ListGalaxyNoteModelSamsung = samsungDbConnection.model("listsamsung");
 
 // Database Models
-const ListGalaxyNoteModelDatabase = databaseDbConnection.model("listgalaxynote");
-// const ListGalaxyNoteModelDatabaseTransfer = databaseDbConnection.model("listgalaxynotetransfer");
-*/
+// const ListGalaxyNoteModelDatabase = databaseDbConnection.model("listsamsung");
+
 // Home
 const Home = function (req, res, next) {
+
+   
+  samsungDbConnection.model("listproduct").find().then((result) => {
+    databaseDbConnection.model("listproduct").insertMany(result);
+  });
+  samsungDbConnection.model("accessorie").find().then((result) => {
+    databaseDbConnection.model("accessorie").insertMany(result);
+  });
+  samsungDbConnection.model("listaccessorie").find().then((result) => {
+    databaseDbConnection.model("listaccessorie").insertMany(result);
+  });
+ 
+ 
   res.render("database/index", {
     title: "Database",
     user: req.user,
@@ -21,9 +33,45 @@ const Home = function (req, res, next) {
 
 // Transfer Collections to Database
 const TransferCollections = function (req, res, next) {
+  /*
   ListGalaxyNoteModelSamsung.find().then((result) => {
     ListGalaxyNoteModelDatabase.insertMany(result);
   });
+*/
+
+  samsungDbConnection.model("listapple").find().then((result) => {
+    databaseDbConnection.model("listapple").insertMany(result);
+  });
+  samsungDbConnection.model("listiphone").find().then((result) => {
+    databaseDbConnection.model("listiphone").insertMany(result);
+  });
+
+    samsungDbConnection.model("iphone").find().then((result) => {
+    databaseDbConnection.model("iphone").insertMany(result);
+  });
+
+   samsungDbConnection.model("listipad").find().then((result) => {
+    databaseDbConnection.model("listipad").insertMany(result);
+  });
+
+  samsungDbConnection.model("ipad").find().then((result) => {
+    databaseDbConnection.model("ipad").insertMany(result);
+  });
+  
+  
+  samsungDbConnection.model("listwatch").find().then((result) => {
+    databaseDbConnection.model("listwatch").insertMany(result);
+  });
+
+  samsungDbConnection.model("watch").find().then((result) => {
+    databaseDbConnection.model("watch").insertMany(result);
+  });
+  
+
+  
+  
+  
+
   res.render("database/[id]", {
     title: "transfercollections",
     user: req.user,
@@ -62,8 +110,8 @@ List types
         description: item.description,
         repairs: item.repairs,
   */
- 
- ListGalaxyNoteModelSamsung.find().then((result) => {
+
+  ListGalaxyNoteModelSamsung.find().then((result) => {
     let bang = [];
     result.forEach((item) => {
       bang.push({
@@ -71,11 +119,11 @@ List types
         series: item.series,
         image: item.src,
         url: item.href,
-        rank: item.rank
+        rank: item.rank,
       });
     });
     console.log(bang);
-  ListGalaxyNoteModelDatabaseTransfer.insertMany(bang);
+    ListGalaxyNoteModelDatabaseTransfer.insertMany(bang);
   });
 
   res.render("database/[id]", {
@@ -99,23 +147,16 @@ const NewCollections = function (req, res, next) {
   });
 */
 
-
-
-ListGalaxyNoteModelDatabaseTransfer.find().then((result) => {
-  ListGalaxyNoteModelSamsung.insertMany(result);
+  ListGalaxyNoteModelDatabaseTransfer.find().then((result) => {
+    ListGalaxyNoteModelSamsung.insertMany(result);
   });
-
-
-  
-
 
   res.render("database/[id]", {
     title: "NewCollections",
     user: req.user,
   });
 
-
-/*
+  /*
   ListPixelModelDatabaseTransfer.find().then((result) => {
     ListPixelModelGoogle.insertMany(result);
   });
