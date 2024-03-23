@@ -4,12 +4,6 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-/*
-var indexRouter = require("./routes/index");
-var databaseRouter = require("./routes/database");
-var servicesRouter = require("./routes/services");
-var transactionRouter = require("./routes/transaction");
-*/
 const portalDbConnection = require("./models/connections/portal.js");
 var User = portalDbConnection.model("User");
 
@@ -96,7 +90,7 @@ app.use(function (req, res, next) {
 
 // End Passport stuff
 var indexRouter = require("./routes/index");
-var transactionRouter = require("./routes/transaction");
+// var transactionRouter = require("./routes/transaction");
 // var databaseRouter = require("./routes/database");
 var servicesRouter = require("./routes/services/index");
 var repairsRouter = require("./routes/services/repairs/index");
@@ -118,7 +112,7 @@ var SoftwareRouter = require("./routes/services/software/index");
 
 // Routes
 app.use("/", indexRouter);
-app.use("/", transactionRouter);
+// app.use("/", transactionRouter);
 // app.use("/", databaseRouter);
 app.use("/", servicesRouter);
 app.use("/", repairsRouter);
