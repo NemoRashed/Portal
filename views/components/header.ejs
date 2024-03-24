@@ -7,30 +7,17 @@
 
   <div>
     <% if (currentUser) {%>
-    <!-- Setup a Cart / POS System / Track Transactions -->
-    <a href="/transaction">Transactions</a>
 
-    <!-- Setup a Inventory System -->
-    <!-- <a href="/inventory">Inventory</a> -->
+    <!-- <a href="/transaction">Transactions</a> -->
+
 
     <!-- Pricing & Services Info -->
     <a href="/services">Services</a> 
 
+    <% if (currentUser.isAdmin == 'true') {%>
    <a href="/database">Database</a> 
+   <%  } %>
 
-
-    <!-- Pricing & Products Info -->
-    <!--  <a href="/products">Products</a> -->
-
-    <!-- Customer Consent Forms -->
-      <!--  <a href="/forms">Forms</a> -->
-
-    <!-- Customer Ticketing System -->
-    <!-- <a href="/ticket">Ticketing</a> -->
-
-    <!-- Customer System -->
-    <!-- <a href="/marketing">Marketing</a> -->
-    
     <a href="/logout">Log Out</a>
 
       <img src="./images/<%= currentUser.avatar%>.svg" alt="A" width="20px" class="profile" /> 

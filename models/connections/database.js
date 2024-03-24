@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 
-const conn = mongoose.createConnection(process.env.MONGODB_URI2, {
-  dbName: "product",
+const conn = mongoose.createConnection(process.env.MONGODB_URI, {
+  dbName: "price",
 });
 
-conn.model('listproduct', require('../schemas/product/listproduct'),'listproduct');
-conn.model('accessorie', require('../schemas/product/accessorie'),'accessorie');
-conn.model('listaccessorie', require('../schemas/product/listaccessorie'),'listaccessorie');
+conn.model("iphone", require("../schemas/apple/iphone"), "iphone");
+
+conn.model("ipad", require("../schemas/apple/ipad"), "ipad");
+
+conn.model("watch", require("../schemas/apple/watch"), "watch");
 
 module.exports = conn;

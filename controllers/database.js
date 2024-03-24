@@ -1,30 +1,10 @@
 // DataBase
-
-const databaseDbConnection = require("../models/connections/database");
+const Database = require("../models/connections/database");
 // Google
-const samsungDbConnection = require("../models/connections/product");
-
-// Main Model
-// const ListGalaxyNoteModelSamsung = samsungDbConnection.model("listsamsung");
-
-// Database Models
-// const ListGalaxyNoteModelDatabase = databaseDbConnection.model("listsamsung");
+const Db = require("../models/connections/apple");
 
 // Home
-const Home = function (req, res, next) {
-
-   
-  samsungDbConnection.model("listproduct").find().then((result) => {
-    databaseDbConnection.model("listproduct").insertMany(result);
-  });
-  samsungDbConnection.model("accessorie").find().then((result) => {
-    databaseDbConnection.model("accessorie").insertMany(result);
-  });
-  samsungDbConnection.model("listaccessorie").find().then((result) => {
-    databaseDbConnection.model("listaccessorie").insertMany(result);
-  });
- 
- 
+const Home = function (req, res, next) { 
   res.render("database/index", {
     title: "Database",
     user: req.user,
@@ -37,45 +17,16 @@ const TransferCollections = function (req, res, next) {
   ListGalaxyNoteModelSamsung.find().then((result) => {
     ListGalaxyNoteModelDatabase.insertMany(result);
   });
-*/
 
-  samsungDbConnection.model("listapple").find().then((result) => {
+    samsungDbConnection.model("listapple").find().then((result) => {
     databaseDbConnection.model("listapple").insertMany(result);
   });
-  samsungDbConnection.model("listiphone").find().then((result) => {
-    databaseDbConnection.model("listiphone").insertMany(result);
-  });
-
-    samsungDbConnection.model("iphone").find().then((result) => {
-    databaseDbConnection.model("iphone").insertMany(result);
-  });
-
-   samsungDbConnection.model("listipad").find().then((result) => {
-    databaseDbConnection.model("listipad").insertMany(result);
-  });
-
-  samsungDbConnection.model("ipad").find().then((result) => {
-    databaseDbConnection.model("ipad").insertMany(result);
-  });
-  
-  
-  samsungDbConnection.model("listwatch").find().then((result) => {
-    databaseDbConnection.model("listwatch").insertMany(result);
-  });
-
-  samsungDbConnection.model("watch").find().then((result) => {
-    databaseDbConnection.model("watch").insertMany(result);
-  });
-  
-
-  
-  
-  
-
+*/
   res.render("database/[id]", {
     title: "transfercollections",
     user: req.user,
   });
+
 };
 
 // Update Reg Collections & Transfered to database
@@ -111,25 +62,55 @@ List types
         repairs: item.repairs,
   */
 
-  ListGalaxyNoteModelSamsung.find().then((result) => {
+
+  Db.model('watch').find().then((result) => {
     let bang = [];
     result.forEach((item) => {
+      
+      for (const key in item.repairs) {
+        item.repairs[key].price = {
+          raw: 0,
+          tax: 10.25,
+          shipping: 5,
+          total: item.repairs[key].price
+        };
+      }
+      bang.push(item);
+/*
       bang.push({
         _id: item._id,
-        series: item.series,
-        image: item.src,
-        url: item.href,
-        rank: item.rank,
+        model: item.model,
+        image: item.image,
+        url: item.url,
+        description: item.description,
+        repairs: {
+          screen: {
+            price: {
+              raw: 0,
+              tax: 10.25,
+              shipping: 5,
+              total: item.repairs.screen.price
+            },
+            time: item.repairs.screen.time,
+            name: item.repairs.screen.name,
+            key: item.repairs.screen.key
+          }
+        },
       });
+      */
     });
     console.log(bang);
-    ListGalaxyNoteModelDatabaseTransfer.insertMany(bang);
-  });
 
+  Database.model('watch').insertMany(bang);
+      res.json(bang);
+
+  });
+/*
   res.render("database/[id]", {
     title: "UpdateCollections",
     user: req.user,
   });
+  */
 };
 
 // Move New Key Updated collections to original
@@ -156,16 +137,7 @@ const NewCollections = function (req, res, next) {
     user: req.user,
   });
 
-  /*
-  ListPixelModelDatabaseTransfer.find().then((result) => {
-    ListPixelModelGoogle.insertMany(result);
-  });
-  res.render("database/[id]", {
-    title: "NewCollections",
-    user: req.user,
-  });
 
-  */
 };
 
 // Take Collections and Change the Href & src to Image & URL
