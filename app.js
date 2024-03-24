@@ -91,7 +91,6 @@ app.use(function (req, res, next) {
 // End Passport stuff
 var indexRouter = require("./routes/index");
 // var transactionRouter = require("./routes/transaction");
-// var databaseRouter = require("./routes/database");
 var servicesRouter = require("./routes/services/index");
 var repairsRouter = require("./routes/services/repairs/index");
 var appleRouter = require("./routes/services/repairs/apple/index");
@@ -113,7 +112,6 @@ var SoftwareRouter = require("./routes/services/software/index");
 // Routes
 app.use("/", indexRouter);
 // app.use("/", transactionRouter);
-// app.use("/", databaseRouter);
 app.use("/", servicesRouter);
 app.use("/", repairsRouter);
 app.use("/", appleRouter);
